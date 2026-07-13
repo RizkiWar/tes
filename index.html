@@ -2,19 +2,42 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>AR Video + Text (Custom Marker)</title>
+    <title>AR Video + UI Text</title>
 
     <!-- A-Frame -->
     <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
 
     <!-- AR.js -->
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+        font-family: Arial, sans-serif;
+      }
+
+      /* KOTAK TEKS FIXED DI LAYAR */
+      #textbox {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background: rgba(0,0,0,0.7);
+        color: white;
+        padding: 15px;
+        box-sizing: border-box;
+        font-size: 14px;
+        line-height: 1.5;
+      }
+    </style>
   </head>
 
-  <body style="margin: 0; overflow: hidden;">
+  <body>
+
+    <!-- SCENE AR -->
     <a-scene embedded arjs>
 
-      <!-- Asset video -->
       <a-assets>
         <video 
           id="vid"
@@ -30,7 +53,7 @@
       <!-- MARKER CUSTOM -->
       <a-marker type="pattern" url="Marker.patt">
 
-        <!-- VIDEO (nempel ke marker) -->
+        <!-- VIDEO NEMPEL MARKER -->
         <a-video 
           src="#vid"
           width="1.6"
@@ -39,38 +62,20 @@
           rotation="-90 0 0"
         ></a-video>
 
-        <!-- BACKGROUND TEKS -->
-        <a-plane
-          position="0 -0.8 0"
-          rotation="-90 0 0"
-          width="2"
-          height="1"
-          color="#000"
-          opacity="0.7"
-        ></a-plane>
-
-        <!-- TEKS -->
-        <a-text
-          value="Pada tahun 1810 Pangeran Diponegoro menikah untuk yang keempat dengan Raden Ayu Citrowati. Puteri Raden Tumengung Ronggo Prawirosentiko, dengan salah satu isteri selir yang merupakan trah Madiun. Belum sempat diperkenalkan dengan keluarga di Yogyakarta, Raden Ayu Citrowati meninggal. Bayi yang baru saja dilahirkan diberi nama Pangeran Alip."
-          position="0 -0.8 0.01"
-          rotation="-90 0 0"
-          width="1.8"
-          align="center"
-          color="#FFF"
-        ></a-text>
-
       </a-marker>
 
-      <!-- Kamera -->
       <a-entity camera></a-entity>
-
     </a-scene>
 
-    <!-- Fix autoplay di HP -->
+    <!-- TEKS (UI SCREEN, BUKAN AR) -->
+    <div id="textbox">
+      Pada tahun 1810 Pangeran Diponegoro menikah untuk yang keempat dengan Raden Ayu Citrowati. Puteri Raden Tumengung Ronggo Prawirosentiko, dengan salah satu isteri selir yang merupakan trah Madiun. Belum sempat diperkenalkan dengan keluarga di Yogyakarta, Raden Ayu Citrowati meninggal. Bayi yang baru saja dilahirkan diberi nama Pangeran Alip.
+    </div>
+
+    <!-- FIX AUTOPLAY HP -->
     <script>
       document.addEventListener("click", function () {
-        const vid = document.querySelector("#vid");
-        vid.play();
+        document.querySelector("#vid").play();
       });
     </script>
 
