@@ -1,45 +1,78 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
-  <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
-</head>
+  <head>
+    <meta charset="utf-8" />
+    <title>AR Video + Text (Custom Marker)</title>
 
-<body style="margin: 0; overflow: hidden;">
+    <!-- A-Frame -->
+    <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
 
-<a-scene embedded arjs>
+    <!-- AR.js -->
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+  </head>
 
-  <a-assets>
-    <video id="vid"
-           src="tes.mp4"
-           preload="auto"
-           loop
-           crossorigin="anonymous"
-           webkit-playsinline
-           playsinline>
-    </video>
-  </a-assets>
+  <body style="margin: 0; overflow: hidden;">
+    <a-scene embedded arjs>
 
-  <a-marker type="pattern" url="Marker.patt">
+      <!-- Asset video -->
+      <a-assets>
+        <video 
+          id="vid"
+          src="tes.mp4"
+          autoplay
+          loop
+          muted
+          playsinline
+          webkit-playsinline
+        ></video>
+      </a-assets>
 
-    <a-video src="#vid"
-             width="2"
-             height="1.2"
-             position="0 0.5 0">
-    </a-video>
+      <!-- MARKER CUSTOM -->
+      <a-marker type="pattern" url="Marker.patt">
 
-  </a-marker>
+        <!-- VIDEO (nempel ke marker) -->
+        <a-video 
+          src="#vid"
+          width="1.6"
+          height="0.9"
+          position="0 0 0"
+          rotation="-90 0 0"
+        ></a-video>
 
-  <a-entity camera></a-entity>
+        <!-- BACKGROUND TEKS -->
+        <a-plane
+          position="0 -0.8 0"
+          rotation="-90 0 0"
+          width="2"
+          height="1"
+          color="#000"
+          opacity="0.7"
+        ></a-plane>
 
-</a-scene>
+        <!-- TEKS -->
+        <a-text
+          value="Pada tahun 1810 Pangeran Diponegoro menikah untuk yang keempat dengan Raden Ayu Citrowati. Puteri Raden Tumengung Ronggo Prawirosentiko, dengan salah satu isteri selir yang merupakan trah Madiun. Belum sempat diperkenalkan dengan keluarga di Yogyakarta, Raden Ayu Citrowati meninggal. Bayi yang baru saja dilahirkan diberi nama Pangeran Alip."
+          position="0 -0.8 0.01"
+          rotation="-90 0 0"
+          width="1.8"
+          align="center"
+          color="#FFF"
+        ></a-text>
 
-<script>
-document.body.addEventListener('click', function () {
-  const video = document.querySelector('#vid');
-  video.play();
-});
-</script>
+      </a-marker>
 
-</body>
+      <!-- Kamera -->
+      <a-entity camera></a-entity>
+
+    </a-scene>
+
+    <!-- Fix autoplay di HP -->
+    <script>
+      document.addEventListener("click", function () {
+        const vid = document.querySelector("#vid");
+        vid.play();
+      });
+    </script>
+
+  </body>
 </html>
